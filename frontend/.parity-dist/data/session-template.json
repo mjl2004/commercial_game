@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "worldYear": 2149,
+    "mapWidth": 2000,
+    "mapHeight": 1320,
+    "stationCount": 20,
+    "minStationDistance": 180,
+    "camera": {
+      "minZoom": 0.55,
+      "maxZoom": 1.85,
+      "defaultZoom": 0.82
+    }
+  },
+  "goods": [
+    { "id": 1, "name": "标准矿石", "shortName": "矿石", "isContraband": false, "basePrice": 280, "priceVariance": 70, "stockMin": 30, "stockMax": 110 },
+    { "id": 2, "name": "高能晶体", "shortName": "晶体", "isContraband": false, "basePrice": 340, "priceVariance": 90, "stockMin": 18, "stockMax": 72 },
+    { "id": 3, "name": "精密零件", "shortName": "零件", "isContraband": false, "basePrice": 520, "priceVariance": 130, "stockMin": 14, "stockMax": 48 },
+    { "id": 4, "name": "星际芯片", "shortName": "芯片", "isContraband": false, "basePrice": 640, "priceVariance": 150, "stockMin": 12, "stockMax": 40 },
+    { "id": 5, "name": "医疗药剂", "shortName": "药剂", "isContraband": false, "basePrice": 180, "priceVariance": 45, "stockMin": 28, "stockMax": 120 },
+    { "id": 6, "name": "生物样本", "shortName": "样本", "isContraband": false, "basePrice": 460, "priceVariance": 120, "stockMin": 10, "stockMax": 36 },
+    { "id": 7, "name": "暗物质核心", "shortName": "暗物质", "isContraband": true, "basePrice": 980, "priceVariance": 220, "stockMin": 6, "stockMax": 18 },
+    { "id": 8, "name": "走私艺术品", "shortName": "艺术品", "isContraband": true, "basePrice": 1200, "priceVariance": 260, "stockMin": 4, "stockMax": 14 }
+  ],
+  "stationNames": [
+    "阿尔法空间站",
+    "贝塔矿业港",
+    "伽马贸易湾",
+    "德尔塔哨站",
+    "埃普西隆中转站",
+    "泽塔黑市",
+    "伊塔研究站",
+    "西塔联运枢纽",
+    "约塔前哨",
+    "卡帕矿场",
+    "拉姆达工厂",
+    "缪空间站",
+    "纽军港",
+    "克西农业穹顶",
+    "奥米克戎港",
+    "派边境站",
+    "罗贸易哨",
+    "西格玛枢纽",
+    "陶前哨站",
+    "宇普西隆站"
+  ],
+  "securityLevels": ["A", "A", "B", "B", "B", "C", "C", "D"],
+  "factions": ["联邦", "中立", "海盗"]
+}

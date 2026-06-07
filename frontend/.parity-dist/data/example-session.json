@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "sessionId": "example-session",
+    "seed": 123456,
+    "generatedAt": "2026-05-28T00:00:00.000Z",
+    "worldYear": 2149,
+    "mapWidth": 2000,
+    "mapHeight": 1320
+  },
+  "goods": [
+    { "id": 1, "name": "标准矿石", "shortName": "矿石", "isContraband": false, "basePrice": 280, "priceVariance": 70, "stockMin": 30, "stockMax": 110 }
+  ],
+  "stations": [
+    {
+      "id": 1,
+      "name": "阿尔法空间站",
+      "x": 340,
+      "y": 280,
+      "security": "A",
+      "faction": "联邦",
+      "independenceFactor": 1.18,
+      "inventory": [
+        { "goodsId": 1, "stock": 82, "basePrice": 280, "currentPrice": 302 }
+      ]
+    }
+  ],
+  "routes": [],
+  "player": {
+    "id": 1,
+    "name": "Pilot",
+    "credits": 10000,
+    "currentStationId": 1,
+    "cargo": [],
+    "cargoCapacity": 80,
+    "wantedLevel": 0,
+    "actionPoints": 100,
+    "maxActionPoints": 100,
+    "status": "EXPLORING"
+  },
+  "ui": {
+    "hoveredStationId": null,
+    "selectedTargetStationId": null,
+    "moveState": "idle",
+    "activeTravel": null
+  }
+}

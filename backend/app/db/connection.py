@@ -11,13 +11,19 @@ async def init_pool() -> asyncpg.Pool:
             settings.database_url,
             min_size=2,
             max_size=10,
+            statement_cache_size=0,
         )
     return _pool
 
 async def close_pool() -> None:
     global _pool
     if _pool:
-        await _pool.close()
+        try:
+            await _pool.close()
+        except RuntimeError:
+            _pool.terminate()
+        except AttributeError:
+            _pool.terminate()
         _pool = None
 
 async def get_pool() -> asyncpg.Pool:
