@@ -32,6 +32,7 @@ interface ActionEnvelope {
   taxPaid?: number;
   rippleAffectedStationIds?: number[];
   actionContext?: {
+    executorUsed?: string;
     randomControl?: {
       encounterRoll?: number;
       encounterIndex?: number;
@@ -217,6 +218,18 @@ export const backendGameGateway: GameGateway = {
   async startMove(session, params) {
     const response = await callSessionAction<ActionEnvelope>('/move/start', params);
     const normalized = normalizeSession(response.session);
+    const debugSnapshot = {
+      params,
+      encounter: response.encounter ?? null,
+      sessionEncounter: normalized.ui.encounter,
+      moveState: normalized.ui.moveState,
+      pendingAction: normalized.ui.pendingAction,
+      actionContext: response.actionContext ?? null,
+      executorUsed: response.actionContext?.executorUsed ?? null,
+      encounterPresent: response.encounter !== null && response.encounter !== undefined,
+    };
+    console.info('[backend-move] /move/start response', debugSnapshot);
+    console.info('[backend-move] /move/start response json', JSON.stringify(debugSnapshot, null, 2));
     await runParityCheck('startMove', normalized.meta.sessionId, normalized, async () => {
       const encounterRoll = response.actionContext?.randomControl?.encounterRoll;
       const encounterIndex = response.actionContext?.randomControl?.encounterIndex;

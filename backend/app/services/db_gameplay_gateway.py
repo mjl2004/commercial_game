@@ -89,9 +89,9 @@ class DBGameplayGateway:
             payload_json.update(random_control)
 
         if action_name == "start_move":
-            if "encounterRoll" not in payload_json:
+            if payload_json.get("encounterRoll") is None:
                 payload_json["encounterRoll"] = random.random()
-            if "encounterIndex" not in payload_json:
+            if payload_json.get("encounterIndex") is None:
                 payload_json["encounterIndex"] = random.randrange(3)
             context.random_control["encounterRoll"] = payload_json["encounterRoll"]
             context.random_control["encounterIndex"] = payload_json["encounterIndex"]

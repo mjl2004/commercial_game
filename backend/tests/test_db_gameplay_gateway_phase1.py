@@ -148,6 +148,37 @@ class DBGameplayGatewayPhase1Test(unittest.IsolatedAsyncioTestCase):
         self.assertIn("encounterRoll", result["actionContext"]["randomControl"])
         self.assertIn("encounterIndex", result["actionContext"]["randomControl"])
 
+    async def test_start_move_replaces_null_random_control_before_database_execution(self):
+        session = self.build_session(601)
+        session["routes"] = [{"from": 1, "to": 2, "travelCost": 1, "status": "ACTIVE"}]
+        session["player"]["currentStationId"] = 1
+        session["ui"]["activeTravel"] = None
+        session["ui"]["hoveredStationId"] = None
+        session["ui"]["selectedTargetStationId"] = None
+        session["ui"]["moveState"] = "idle"
+        session["ui"]["pendingAction"] = {"type": None, "stationId": None, "targetStationId": None, "yearsCost": None, "baseYearsSettled": True}
+
+        async def fake_run_database_action(action_name, _session, payload):
+            self.assertEqual(action_name, "start_move")
+            self.assertIsInstance(payload["encounterRoll"], float)
+            self.assertIsInstance(payload["encounterIndex"], int)
+            return {"ok": True, "session": session, "encounter": None}
+
+        with patch(
+            "app.services.db_gameplay_gateway.DBGameplayGateway._run_database_action",
+            new=AsyncMock(side_effect=fake_run_database_action),
+        ):
+            result = await DBGameplayGateway.execute(
+                "start_move",
+                session,
+                {"stationId": 1, "targetStationId": 2, "yearsCost": 1, "encounterRoll": None, "encounterIndex": None},
+                execution_mode="database_native",
+            )
+
+        self.assertTrue(result["ok"])
+        self.assertIsInstance(result["actionContext"]["randomControl"]["encounterRoll"], float)
+        self.assertIsInstance(result["actionContext"]["randomControl"]["encounterIndex"], int)
+
 
 if __name__ == "__main__":
     unittest.main()
